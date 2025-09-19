@@ -1,22 +1,32 @@
 import api from "../../services/api"
 import { Background } from "./styles"
+import { useState } from "react"
 
 function Home() {
 
-   async function getMovies(){
+    const [movie, setMovies] = useState()
+
+    async function getMovies() {
         const data = await api.get('/movie/popular')
 
-        console.log(data)
+        // setMovies(data.data.results[1])
+
+        // console.log(movie)
 
     }
 
     getMovies()
 
     return (
-        <Background img="https://image.tmdb.org/t/p/original/c55sXCaQBj3vuHqZe62tv90xCQS.jpg">
-            <h1>Home</h1>
-            <p>Essa é a Home</p>
-        </Background>
+        <>
+            {movie && (
+
+                <Background img="https://image.tmdb.org/t/p/original/c55sXCaQBj3vuHqZe62tv90xCQS.jpg">
+                    <h1>{movie.title}</h1>
+                    <p>Essa é a Home</p>
+                </Background>
+            )}
+        </>
     )
 }
 
