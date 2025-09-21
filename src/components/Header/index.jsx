@@ -1,10 +1,23 @@
-import logo from '../../assets/logo.png'
+import { Conatainer, Menu, Li } from "./styles"
+import { Link } from "react-router-dom"
+import Logo from "../../assets/logo.png"
 
-function Header(){
-    return(
-        <div>
-            <img src={logo} alt="Logo-dev-movies" style={{width: 500}} />
-        </div>
+function Header() {
+    return (
+        <Conatainer>
+            <img src={Logo} alt="Logo" />
+            <Menu>
+                <Li>
+                    <Link to={"/"}>Home</Link>
+                </Li>
+                <Li>
+                    <Link to={"/movies"}>Filmes</Link>
+                </Li>
+                <Li>
+                    <Link to={"/series"}>Séries</Link>
+                </Li>
+            </Menu>
+        </Conatainer>
     )
 }
 
