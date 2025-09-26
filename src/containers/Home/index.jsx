@@ -4,6 +4,7 @@ import Button from "../../components/Button"
 import { useState, useEffect } from "react"
 import Slider from "../../components/Slider"
 import { getImages } from "../../utils/getImages"
+import Modal from "../../components/Modal"
 
 function Home() {
 
@@ -19,7 +20,7 @@ function Home() {
             const { data: { results } } = await api.get('/movie/popular')
 
             console.log(results)
-            setMovie(results[0])
+            setMovie(results[1])
         }
 
         async function getTopMovies() {
@@ -64,7 +65,7 @@ function Home() {
                 <Background img={getImages(movie.backdrop_path)}>
 
                     <Container>
-
+                        <Modal movieId={movie.id}/>
                         <Info>
                             <h1>{movie.title}</h1>
                             <p>{movie.overview}</p>
