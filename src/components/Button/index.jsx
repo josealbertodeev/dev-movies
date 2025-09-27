@@ -1,13 +1,11 @@
 import { ButtonWhite, ButtonRed } from "./styles"
 
-function Button({ children, red }) {
+function Button({ children, red, ...rest }) {
     return (
         <>
-            {red ? (<ButtonRed> {children}</ButtonRed >) : (<ButtonWhite>{children}</ButtonWhite>)}
+            {red ? (<ButtonRed {...rest}> {children}</ButtonRed >) : (<ButtonWhite {...rest}>{children}</ButtonWhite>)}
         </>
     )
 }
-
-
 
 export default Button

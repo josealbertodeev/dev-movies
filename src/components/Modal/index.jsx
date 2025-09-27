@@ -5,7 +5,7 @@ import api from "../../services/api"
 import { useState } from "react"
 
 
-function Modal({ movieId }) {
+function Modal({ movieId, setshowModal }) {
 
     const [movie, setMovie] = useState()
 
@@ -23,7 +23,7 @@ function Modal({ movieId }) {
 
 
     return (
-        <Background>
+        <Background onClick={() => setshowModal(false)}>
             {movie && (
 
                 <Container>
@@ -35,7 +35,5 @@ function Modal({ movieId }) {
         </Background>
     )
 }
-
-
 
 export default Modal
