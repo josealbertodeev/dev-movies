@@ -6,6 +6,7 @@ import Home from "../containers/Home/index.jsx"
 import Movies from "../containers/Movies/index.jsx"
 import Series from "../containers/Series/index.jsx"
 import DefaultLayout from "../layout/DefaultLayout.jsx"
+import Detalhe from "../containers/Detalhe/index.jsx"
 
 function Rota() {
     return (
@@ -14,6 +15,7 @@ function Rota() {
                 <Route path='/' element={<Home />} />
                 <Route path='/movies' element={<Movies />} />
                 <Route path='/series' element={<Series />} />
+                <Route path='/detalhe?:id' element={<Detalhe />} />
             </Route>
         </Routes>
     )

@@ -1,10 +1,11 @@
-import api from "../../services/api"
-import { Background, Info, Poster, Container, ContainerButtons } from "./styles"
-import Button from "../../components/Button"
 import { useState, useEffect } from "react"
-import Slider from "../../components/Slider"
-import { getImages } from "../../utils/getImages"
+import { useNavigate } from "react-router-dom"
+import Button from "../../components/Button"
 import Modal from "../../components/Modal"
+import Slider from "../../components/Slider"
+import api from "../../services/api"
+import { getImages } from "../../utils/getImages"
+import { Background, Info, Poster, Container, ContainerButtons } from "./styles"
 
 function Home() {
 
@@ -14,6 +15,8 @@ function Home() {
     const [topSeries, setTopSeries] = useState()
     const [popularSeries, setPopularSeries] = useState()
     const [topPeople, setTopPeople] = useState()
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         async function getMovies() {
@@ -72,7 +75,8 @@ function Home() {
                             <p>{movie.overview}</p>
 
                             <ContainerButtons>
-                                <Button red={true}>Assista Agora</Button>
+                                <Button red={true} onClick={() => navigate(`/detalhe/${movie.id}`)}>Assista Agora</Button>
+                                
                                 <Button onClick={() => setshowModal(true)} red={false}>Assista o Trailer</Button>
                             </ContainerButtons>
                         </Info>
