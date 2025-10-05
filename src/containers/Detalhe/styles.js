@@ -89,3 +89,7 @@ export const Info = styled.div`
     }
 `
 
+export const ContainerMovies = styled.div`
+
+`
+

@@ -23,8 +23,6 @@ function Home() {
 
         async function getAllData() {
 
-            console.time('time')
-
             // Executa tudo ao mesmo tempo
             Promise.all([
                 getMovies(),
@@ -44,10 +42,6 @@ function Home() {
                     setTopPeople(topPeople)
 
                 })
-                .catch(error => console.log(error))
-
-
-            console.timeEnd('time')
         }
 
         getAllData()

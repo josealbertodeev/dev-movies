@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react"
-import { Container, Background, Cover, Info } from "./styles"
+import { Container, Background, Cover, Info, ContainerMovies } from "./styles"
 import { getMovieById, getMovieCredits, getMovieSimiliar, getMovieVideos } from "../../services/getData"
 import { useParams } from "react-router-dom"
 import { getImages } from "../../utils/getImages"
+import SpanGeneros from "../../components/SpanGeneros"
+import Credits from "../../components/Credits"
+import Slider from "../../components/Slider"
 
 function Detalhe() {
 
@@ -24,15 +27,12 @@ function Detalhe() {
 
             ])
                 .then(([movie, videos, credits, similiar]) => {
-
-                    console.log({ movie, videos, credits, similiar })
                     setMovie(movie)
-                    setMovieVideos(videos)
+                    setMovieVideos(videos) 
                     setMovieCredits(credits)
                     setMovieSimiliar(similiar)
 
                 })
-                .catch(error => console.log(error))
 
         }
 
@@ -51,12 +51,17 @@ function Detalhe() {
                         </Cover>
                         <Info>
                             <h2>{movie.title}</h2>
-                            <div>Generos</div>
+                            <SpanGeneros genres={movie.genres} />
                             <p>{movie.overview}</p>
-                            <div>Créditos</div>
+                            <div>
+                                <Credits credits={movieCredits} />
+                            </div>
                         </Info>
-                        <div>Detalhe</div>
                     </Container>
+                    <ContainerMovies></ContainerMovies>
+
+                    {movieSimiliar && <Slider info={movieSimiliar} title={'Filmes Similiares'} />}
+                    
                 </>
             )
             }
