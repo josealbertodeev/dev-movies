@@ -139,7 +139,7 @@ O projeto utiliza ESLint e Prettier para manter a qualidade e consistência do c
 
 ## 👨‍💻 Autor
 
-Desenvolvido com ❤️ por [José Alberto](https://github.com/josealbertodeev)
+Desenvolvido por [José Alberto](https://github.com/josealbertodeev)
 
 ---
 
