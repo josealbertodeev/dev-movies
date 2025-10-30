@@ -1,0 +1,35 @@
+import styled, { css } from "styled-components";
+
+const buttonStyles = css`
+    border: 3px solid #fff;
+    background-color: transparent;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 700;
+
+    &:hover {
+        background-color: #fff;
+        color: #e50914;
+    }
+`;
+
+export const ButtonWhite = styled.button`
+    ${buttonStyles}
+`;
+
+export const ButtonRed = styled.button`
+    ${buttonStyles}
+
+    background: #e50914;
+    border: 4px solid transparent;
+    box-shadow: 0 0 7px 8px rgb(255, 0, 0, 30%);
+
+    &:hover {
+        box-shadow: 0 0 7px 15px rgb(255, 0, 0, 30%);
+        background: #ff0000;
+        color: #fff;
+    }
+`;
