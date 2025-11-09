@@ -9,7 +9,7 @@ function Router() {
     <Routes>
       <Route element={<DefaultLayout />}>
         <Route path="/" element={<Home />} />
-        <Route path="/filmes" element={<Movies />} />
+        <Route path="/movies" element={<Movies />} />
         <Route path="/series" element={<Series />} />
       </Route>
     </Routes>

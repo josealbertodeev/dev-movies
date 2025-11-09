@@ -8,6 +8,9 @@ import { useState, useEffect } from 'react';
 function Home() {
     const [movie, setMovies] = useState();
     const [topMovie, setTopMovie] = useState();
+    const [topSeries, setTopSeries] = useState();
+    const [popularSeries, setPopularSeries] = useState();
+    const [topPeople, setTopPeople] = useState();
 
     useEffect(() => {
         async function getMovies() {
@@ -24,8 +27,35 @@ function Home() {
             setTopMovie(results);
         }
 
+        async function getTopSeries() {
+
+            const { data: { results } } = await api.get("/tv/top_rated")
+
+            console.log(results);
+            setTopSeries(results);
+        }
+
+        async function getPopularSeries() {
+
+            const { data: { results } } = await api.get("/tv/popular")
+
+            console.log(results);
+            setPopularSeries(results);
+        }
+
+        async function getTopPeople() {
+
+            const { data: { results } } = await api.get("/person/popular")
+
+            console.log("top artistas", results);
+            setTopPeople(results);
+        }
+
         getMovies();
         getTopMovies();
+        getTopSeries();
+        getPopularSeries();
+        getTopPeople();
     }, [])
 
 
@@ -52,6 +82,9 @@ function Home() {
                 </Background>
             )}
             {topMovie && <Slider info={topMovie} title={"Top Filmes"} />}
+            {topSeries && <Slider info={topSeries} title={"Top Séries"} />}
+            {popularSeries && <Slider info={popularSeries} title={"Séries Populares"} />}
+            {topPeople && <Slider info={topPeople} title={"Top Atores"} />}
         </>
     );
 }
