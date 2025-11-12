@@ -22,6 +22,8 @@ export const Menu = styled.ul`
 `;
 
 export const Li = styled.li`
+    position: relative;
+
     a{
         color: #FFFFFF;
         text-decoration: none;
@@ -30,10 +32,20 @@ export const Li = styled.li`
         cursor: pointer;
         transition: color 0.3s;
 
-
         &:hover{
-            color: #FF0000;
+            color: #6C63FF; // Roxo suave alternativo
         }
+    }
+
+    &::after{
+        content: '';
+        height: 3px;
+        width: ${props => (props.isActive ? '100%' : '0')};
+        background-color: #6C63FF; // Roxo suave alternativo
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        transition: width 0.4s ease-in-out;
     }
 `;
 
