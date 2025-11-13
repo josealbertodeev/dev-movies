@@ -1,4 +1,5 @@
 import Button from '../../components/Button';
+import Modal from '../../components/Modal';
 import Slider from '../../components/Slider';
 import api from '../../services/api';
 import { getImages } from '../../utils/getImages';
@@ -67,6 +68,7 @@ function Home() {
             {movie && (
                 <Background img={getImages(movie.backdrop_path)}>
                     <Container>
+                        <Modal movieId={movie.id} />
                         <Info>
                             <h1>{movie.title}</h1>
                             <p>{movie.overview}</p>
