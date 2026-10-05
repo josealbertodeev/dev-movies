@@ -2,13 +2,16 @@ import { Route, Routes } from 'react-router-dom'
 import Home from '../pages/Home'
 import Movies from '../pages/Movies'
 import Series from '../pages/Series'
+import DefaultLayout from '../layout/DefaultLayout'
 
-function Router(){
-    return(
+function Router() {
+    return (
         <Routes>
-            <Route path='/' element={<Home/>}/>
-            <Route path='/movies' element={<Movies/>}/>
-            <Route path='/series' element={<Series/>}/>
+            <Route element={<DefaultLayout />}>
+                <Route path='/' element={<Home />} />
+                <Route path='/movies' element={<Movies />} />
+                <Route path='/series' element={<Series />} />
+            </Route>
         </Routes>
     )
 }
