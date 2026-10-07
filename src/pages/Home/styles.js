@@ -16,6 +16,49 @@ export const Background = styled.div `
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: rgba(0, 0, 0, 0.5);
     }
+`
+
+export const Container = styled.div `
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 100%;
+    max-width: 1500px;
+`
+
+export const Info = styled.div `
+    z-index: 2;
+    padding: 20px;
+    width: 50%;
+
+    h1 {
+        font-size: 40px;
+        font-weight: 700;
+        color: #ffffff;
+    }
+
+    p{
+        font-size: 15px;
+        font-weight: 300;
+        color: #ffffff;
+        margin-top: 30px;
+        margin-bottom: 20px;
+    }
+` 
+
+export const Poster = styled.div `
+    z-index: 2;
+
+    img {
+        width: 300px;
+        border-radius: 30px;
+        border: 1px solid black;
+    }
+` 
+
+export const ContainerButton = styled.div `
+    display: flex;
+    gap: 20px;
 `
