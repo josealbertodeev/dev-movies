@@ -1,7 +1,12 @@
+
+
 # Dev Movies
 
 Site de filmes e séries feito com **React + Vite**, que consome a API do [TMDB](https://www.themoviedb.org/). 
+
 Projeto de estudo: o README explica o que cada parte faz e como ela foi construída.
+
+## Preview 
 
 <table>
   <tr>
@@ -10,6 +15,8 @@ Projeto de estudo: o README explica o que cada parte faz e como ela foi constru�
     <td width="33%"><img alt="Screenshot_3" src="https://github.com/user-attachments/assets/0a92154a-521a-48d8-ab81-65343718e558" /></td>
   </tr>
 </table>
+
+<img width="800" height="380" alt="video-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/3a84559b-8a06-4aad-b2b3-a28abaafd5f1" />
 
 ## Tecnologias
 
