@@ -16,7 +16,7 @@ export const Background = styled.div`
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
-    min-width: 1200px;
+    width: 100%;
 
     &::before{
         content: '';
@@ -34,8 +34,13 @@ export const Container = styled.div`
     align-items: flex-start;
     height: 100%;
     max-width: 1500px;
-    margin-top: 100px;
+    margin: 100px auto 0;
 
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        margin-top: 80px;
+    }
 `
 
 export const Cover = styled.div`
@@ -49,6 +54,15 @@ export const Cover = styled.div`
         border-radius: 30px;
         border: 4px solid transparent;
         animation: ${scale} 0.5s linear;
+    }
+
+    @media (max-width: 768px) {
+        justify-content: center;
+        height: auto;
+
+        img{
+            width: 220px;
+        }
     }
 `
 
@@ -70,6 +84,14 @@ export const Info = styled.div`
         color: #fff;
         margin-top: 20px;
         margin-bottom: 30px;
+    }
+
+    @media (max-width: 768px) {
+        width: 100%;
+
+        h2{
+            font-size: 24px;
+        }
     }
 `
 export const ContainerMovies = styled.div`
@@ -97,6 +119,9 @@ export const ContainerMovies = styled.div`
 
     iframe{
         border: none;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        height: auto;
     }
 
 `

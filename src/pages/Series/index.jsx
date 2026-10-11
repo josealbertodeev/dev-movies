@@ -1,11 +1,7 @@
+import MediaPage from '../../components/MediaPage'
 
 export function Series() {
-    return (
-        <div>
-            <h1>Series</h1>
-            <p>Essa e a Pagina de Series</p>
-        </div>
-    )
+    return <MediaPage type='tv' title='Séries' />
 }
 
 export default Series

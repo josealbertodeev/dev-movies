@@ -1,26 +1,44 @@
 import { useEffect, useState } from 'react'
-import { Container, Background } from './styles'
+import { Container, Background, CloseButton } from './styles'
 import { getIdMovie } from '../../services/getData'
 
-function Modal({ movieId, setShowModal }) {
+function Modal({ movieId, setShowModal, type = 'movie' }) {
     const [idMovie, setIdMovie] = useState()
+    const [loaded, setLoaded] = useState(false)
 
     useEffect(() => {
         async function loadVideo() {
-            setIdMovie(await getIdMovie(movieId))
+            try {
+                setIdMovie(await getIdMovie(movieId, type))
+            } catch (error) {
+                console.error(error)
+            }
+            setLoaded(true)
         }
         loadVideo()
-    }, [movieId])
+    }, [movieId, type])
+
+    useEffect(() => {
+        function handleKeyDown(e) {
+            if (e.key === 'Escape') setShowModal(false)
+        }
+
+        window.addEventListener('keydown', handleKeyDown)
+        return () => window.removeEventListener('keydown', handleKeyDown)
+    }, [setShowModal])
 
     return (
         <Background onClick={() => setShowModal(false)}>
-            {idMovie && (
-                <Container>
-                    <iframe src={`https://www.youtube.com/embed/${idMovie.key}`} title='Youtube Video Player' height={'500px'} width={'100%'}>
-
+            <Container onClick={e => e.stopPropagation()}>
+                <CloseButton type='button' aria-label='Fechar' onClick={() => setShowModal(false)}>
+                    &times;
+                </CloseButton>
+                {idMovie && (
+                    <iframe src={`https://www.youtube.com/embed/${idMovie.key}`} title='Youtube Video Player' allowFullScreen>
                     </iframe>
-                </Container>
-            )}
+                )}
+                {loaded && !idMovie && <p>Trailer indisponível.</p>}
+            </Container>
         </Background>
     )
 }

@@ -25,9 +25,18 @@ export async function getTopPeople() {
     return results
 }
 
-export async function getIdMovie(movieId) {
-    const { data: { results } } = await api.get(`movie/${movieId}/videos`)
-    return results[0]
+export async function getIdMovie(movieId, type = 'movie') {
+    const { data: { results } } = await api.get(`${type}/${movieId}/videos`)
+    if (results.length) return results[0]
+
+    // muitos títulos não têm vídeo em pt-BR; tenta em inglês
+    const { data: { results: fallback } } = await api.get(`${type}/${movieId}/videos`, { params: { language: 'en-US' } })
+    return fallback.find(v => v.site === 'YouTube' && v.type === 'Trailer') || fallback.find(v => v.site === 'YouTube')
+}
+
+export async function getMediaList(type, category, page = 1) {
+    const { data: { results } } = await api.get(`${type}/${category}`, { params: { page } })
+    return results
 }
 
 export async function getMovieCredits(movieId) {

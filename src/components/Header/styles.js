@@ -14,8 +14,16 @@ export const Container = styled.div`
     transition: background-color 0.6s ease;
 
     img{
-        width: 20%;
+        width: clamp(110px, 20vw, 350px);
         padding: 20px 50px;
+    }
+
+    @media (max-width: 768px) {
+        min-height: 70px;
+
+        img{
+            padding: 10px 16px;
+        }
     }
 `
 export const Menu = styled.ul`
@@ -49,5 +57,10 @@ export const Li = styled.li`
 
     &:hover::after{
         width: 100%;
+    }
+
+    @media (max-width: 768px) {
+        font-size: 15px;
+        margin-right: 14px;
     }
 `
