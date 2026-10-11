@@ -1,7 +1,16 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
-export const Background = styled.div `
-    background-image: url(${props => props.imagem}); ;
+const scale = keyframes`
+    from{
+        transform: scale(0)
+    }
+    to{
+         transform: scale(1)
+    }
+`
+
+export const Background = styled.div`
+    background-image: url(${props => props.$imagem}); ;
     height: 100vh;
     background-position: center;
     background-size: cover;
@@ -16,11 +25,11 @@ export const Background = styled.div `
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
+        background-color: rgba(0, 0, 0, 0.4);
     }
 `
 
-export const Container = styled.div `
+export const Container = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -28,7 +37,7 @@ export const Container = styled.div `
     max-width: 1500px;
 `
 
-export const Info = styled.div `
+export const Info = styled.div`
     z-index: 2;
     padding: 20px;
     width: 50%;
@@ -46,19 +55,20 @@ export const Info = styled.div `
         margin-top: 30px;
         margin-bottom: 20px;
     }
-` 
+`
 
-export const Poster = styled.div `
+export const Poster = styled.div`
     z-index: 2;
 
     img {
         width: 300px;
         border-radius: 30px;
-        border: 1px solid black;
+        border: 4px solid transparent;
+        animation: ${scale} 0.5s linear;
     }
-` 
+`
 
-export const ContainerButton = styled.div `
+export const ContainerButton = styled.div`
     display: flex;
     gap: 20px;
 `

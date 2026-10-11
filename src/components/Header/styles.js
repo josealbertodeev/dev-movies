@@ -2,16 +2,20 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
+    min-height: 100px;
     z-index: 99;
     position: fixed;
     top: 0%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: ${props => props.$changeBackground ? '#0f1d23' : 'transparent'};
+    transition: background-color 0.6s ease;
 
     img{
-        width: 28%;
-        padding: 10px 50px;
+        width: 20%;
+        padding: 20px 50px;
     }
 `
 export const Menu = styled.ul`
@@ -22,9 +26,10 @@ export const Menu = styled.ul`
 export const Li = styled.li`
     font-weight: 600;
     cursor: pointer;
-    font-size: 24px;
+    font-size: 20px;
     position: relative;
     margin-right: 40px;
+
     a{
         text-decoration: none;
         color: #fff
@@ -33,7 +38,7 @@ export const Li = styled.li`
     &::after{
         content:'';
         height: 3px;
-        width: ${props => props.isActive ? '100%' : '0%'};
+        width: ${props => props.$isActive ? '100%' : '0%'};
         background-color: #ff0000;
         position: absolute;
         bottom: -10px;
