@@ -18,6 +18,10 @@ Projeto de estudo: o README explica o que cada parte faz e como ela foi construÃ
 
 <img width="800" height="380" alt="video-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/3a84559b-8a06-4aad-b2b3-a28abaafd5f1" />
 
+---
+
+ðŸ”—[Acesse o Site aqui](https://dev-movies-opal.vercel.app)
+
 ## Tecnologias
 
 | Tecnologia | Para que serve |
