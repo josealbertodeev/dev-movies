@@ -1,138 +1,112 @@
-
-
 # Dev Movies
 
-Site de filmes e séries feito com **React + Vite**, que consome a API do [TMDB](https://www.themoviedb.org/). 
+Catálogo de filmes e séries com dados da API do [TMDB](https://www.themoviedb.org/): destaques, listas com paginação, página de detalhes com elenco e trailers. Feito com React, Vite e styled-components.
 
-Projeto de estudo: o README explica o que cada parte faz e como ela foi construída.
-
-## Preview 
+**[Ver o projeto online](https://dev-movies-opal.vercel.app)**
 
 <table>
   <tr>
-    <td width="33%"><img alt="Screenshot_1" src="https://github.com/user-attachments/assets/3c8e14a3-5fb2-4716-b172-ad3e9ba18729" /></td>
-    <td width="33%"><img alt="Screenshot_2" src="https://github.com/user-attachments/assets/6d29386f-ee71-48d4-b25d-a7e5a18cbe9f" /></td>
-    <td width="33%"><img alt="Screenshot_3" src="https://github.com/user-attachments/assets/0a92154a-521a-48d8-ab81-65343718e558" /></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/3c8e14a3-5fb2-4716-b172-ad3e9ba18729" alt="Página inicial"></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/6d29386f-ee71-48d4-b25d-a7e5a18cbe9f" alt="Lista de filmes"></td>
+    <td width="33%"><img src="https://github.com/user-attachments/assets/0a92154a-521a-48d8-ab81-65343718e558" alt="Detalhes do filme"></td>
   </tr>
 </table>
 
-<img width="800" height="380" alt="video-ezgif com-video-to-gif-converter" src="https://github.com/user-attachments/assets/3a84559b-8a06-4aad-b2b3-a28abaafd5f1" />
+<img src="https://github.com/user-attachments/assets/3a84559b-8a06-4aad-b2b3-a28abaafd5f1" alt="Navegação pelo site" width="800">
 
----
+## Funcionalidades
 
-🔗[Acesse o Site aqui](https://dev-movies-opal.vercel.app)
+- **Página inicial** com um filme em destaque e carrosséis de top filmes, top séries, séries populares e artistas
+- **Filmes e Séries** com destaque, abas "Populares" e "Mais bem avaliados", grade responsiva e botão "Carregar mais"
+- **Detalhes do filme** com pôster, gêneros, sinopse, elenco, vídeos e filmes similares
+- **Trailer em modal**, que fecha pelo botão ×, pela tecla Esc ou clicando fora do vídeo
+- **Busca de trailer com fallback:** tenta em português e, se não houver, busca em inglês, dando preferência a trailers do YouTube
+- **Header** que muda de fundo ao rolar a página e destaca a página atual
 
 ## Tecnologias
 
-| Tecnologia | Para que serve |
+| Tecnologia | Uso |
 | --- | --- |
-| React 19 | Criar a interface com componentes |
+| React 19 | Interface em componentes |
 | Vite | Servidor de desenvolvimento e build |
-| react-router-dom | Navegação entre páginas sem recarregar |
-| styled-components | CSS escrito dentro do JavaScript, um arquivo `styles.js` por componente |
-| axios | Chamadas HTTP para a API |
-| swiper | Carrossel (slider) de cards |
+| React Router | Rotas sem recarregar a página |
+| styled-components | Um arquivo `styles.js` por componente |
+| Axios | Requisições para a API do TMDB |
+| Swiper | Carrosséis com arraste |
 
-## Como rodar
-
-```bash
-yarn            # instala as dependências
-yarn dev        # inicia em modo desenvolvimento
-yarn build      # gera a versão de produção em /dist
-yarn preview    # testa a versão de produção
-```
-
-## Estrutura de pastas
-
-```
-public/
-  favicon.svg            # ícone da aba do navegador
-src/
-  assets/                # imagens (logo)
-  components/            # peças reutilizáveis da interface
-    Button/  Card/  Credits/  Header/
-    MediaPage/  Modal/  Slider/  SpanGenres/
-  layout/DefaultLayout   # estrutura comum às páginas (Header + conteúdo)
-  pages/                 # uma pasta por página
-    Home/  Movies/  Series/  Detalhe/
-  routes/routes.jsx      # define qual URL abre qual página
-  services/              # comunicação com a API
-    api.js  getData.js
-  styles/globalStyles.js # estilos globais (reset e fundo preto)
-  utils/getImages.js     # monta a URL completa das imagens do TMDB
-```
-
-Cada componente fica em sua própria pasta com `index.jsx` (lógica e HTML) e `styles.js` (CSS).
-
-## Como o site funciona
-
-### Rotas
-Definidas em [src/routes/routes.jsx](src/routes/routes.jsx):
+## Rotas
 
 | URL | Página |
 | --- | --- |
-| `/` | Home |
+| `/` | Página inicial |
 | `/filmes` | Filmes |
 | `/series` | Séries |
-| `/detalhe/:id` | Detalhe de um filme |
+| `/detalhe/:id` | Detalhes de um filme |
 
-Todas ficam dentro do `DefaultLayout`, que mostra o `Header` fixo no topo.
+Todas as rotas ficam dentro do `DefaultLayout`, que renderiza o header fixo. O `vercel.json` redireciona qualquer URL para o `index.html`, para que recarregar a página em `/filmes` não dê erro 404 no deploy.
 
-### Acesso à API
-- [src/services/api.js](src/services/api.js) cria a instância do axios com a URL base, a chave e o idioma `pt-BR`.
-- [src/services/getData.js](src/services/getData.js) reúne uma função por tipo de busca (`getTopMovies`, `getMovieCredits`, `getMediaList` etc.). As páginas só chamam essas funções e nunca usam o axios direto.
+## Decisões técnicas
 
-### Home
-Mostra um filme em destaque (fundo, título, sinopse e pôster) e depois sliders: Top Filmes, Top Séries, Séries Populares e Top Artistas. Os dados são buscados todos juntos com `Promise.all`.
+**Camada de serviço separada.** O `services/api.js` cria a instância do Axios com URL base, chave e idioma `pt-BR`. O `services/getData.js` tem uma função por tipo de busca (`getTopMovies`, `getMediaList`, `getMovieCredits`...). Os componentes só chamam essas funções e nunca usam o Axios diretamente. Se a API mudar, a alteração fica concentrada em um único lugar.
 
-### Detalhe
-Mostra pôster, gêneros, sinopse, elenco, todos os vídeos do filme e um slider de filmes similares.
+**Requisições em paralelo.** A página inicial e a de detalhes buscam todos os dados de uma vez com `Promise.all`, em vez de esperar uma resposta para começar a próxima.
 
-## O que foi adicionado nesta etapa
-
-### 1. Botão de fechar no modal do trailer
-O modal ([Modal](src/components/Modal/index.jsx)) agora fecha de três formas:
-- clicando no **×** no canto;
-- apertando **Esc** (um `useEffect` escuta o teclado e remove o ouvinte ao sair);
-- clicando no fundo escuro.
-
-Clicar dentro do vídeo não fecha, porque o container usa `stopPropagation()` para o clique não "subir" até o fundo.
-
-Além disso:
-- o fundo agora é `position: fixed; inset: 0`, cobrindo toda a tela;
-- o vídeo usa `aspect-ratio: 16 / 9` em vez de altura fixa, o que ajuda no celular;
-- se não houver trailer, aparece "Trailer indisponível." em vez de uma caixa vazia.
-
-### 2. Trailer de séries
-O modal agora recebe a prop `type` (`'movie'` ou `'tv'`), pois a API usa endereços diferentes (`movie/ID/videos` e `tv/ID/videos`).
-
-Muitos títulos não têm vídeo em português. Por isso `getIdMovie` tenta primeiro `pt-BR` e, se vier vazio, busca em inglês, preferindo um vídeo do tipo *Trailer* do YouTube.
-
-### 3. Páginas Filmes e Séries
-As duas páginas eram só um título. Agora usam o mesmo componente, [MediaPage](src/components/MediaPage/index.jsx), que recebe `type` e `title`:
+**Um componente para duas páginas.** Filmes e Séries usam o mesmo `MediaPage`, que recebe o tipo como prop:
 
 ```jsx
 <MediaPage type='movie' title='Filmes' />
 <MediaPage type='tv' title='Séries' />
 ```
 
-Isso evita escrever o código duas vezes. A página tem:
-- **destaque** no topo, usando o primeiro item de "mais bem avaliados" para ser diferente do destaque da Home;
-- **abas** Populares / Mais bem avaliados;
-- **grade** de cards que se adapta à largura da tela (`grid` com `auto-fill`);
-- botão **Carregar mais**, que pede a próxima `page` da API e junta o resultado à lista.
+O tipo define o endereço da API (`movie/popular` ou `tv/popular`) e se os cards levam para a página de detalhes.
 
-Em filmes, destaque e cards levam ao detalhe. Séries ainda não têm página de detalhe.
+**Paginação acumulada.** "Carregar mais" busca a próxima página e junta o resultado à lista existente com `setItems(prev => [...prev, ...results])`. Trocar de aba volta para a página 1.
 
-### 4. Favicon
-Criado [public/favicon.svg](public/favicon.svg), um play vermelho sobre fundo escuro. O `index.html` já apontava para esse arquivo.
+**Modal sem vazamento de eventos.** O ouvinte da tecla Esc é registrado em um `useEffect` e removido na função de limpeza quando o modal fecha. O clique dentro do vídeo usa `stopPropagation()` para não chegar ao fundo, que fecha o modal.
 
-### 5. Responsividade
-Adicionados breakpoints com `@media (max-width: 768px)` nos `styles.js`:
-- **Header:** logo com `clamp()` (tamanho mínimo, ideal e máximo), menu menor;
-- **Home:** o destaque vira coluna, o título e o pôster diminuem, a sinopse é cortada em 6 linhas e os botões quebram de linha;
-- **Detalhe:** removido o `min-width: 1200px`, que causava rolagem horizontal; no celular vira coluna;
-- **Slider:** margens e títulos menores;
-- **Modal:** ocupa 92% da largura.
+**Layout responsivo sem altura fixa.** O vídeo do modal usa `aspect-ratio: 16 / 9`, a grade usa `grid` com `auto-fill` e o logo usa `clamp()`.
 
+## Estrutura
 
+```
+src/
+├── components/        # Button, Card, Credits, Header, MediaPage, Modal, Slider, SpanGenres
+├── layout/            # DefaultLayout (header + conteúdo)
+├── pages/             # Home, Movies, Series, Detalhe
+├── routes/routes.jsx  # Mapa de URLs para páginas
+├── services/          # api.js (Axios) e getData.js (funções de busca)
+├── styles/            # Estilos globais
+└── utils/getImages.js # Monta a URL das imagens do TMDB
+```
+
+Cada componente tem sua pasta com `index.jsx` (estrutura e lógica) e `styles.js` (estilo).
+
+## Como rodar localmente
+
+Pré-requisitos: Node.js 20.19 ou superior e Yarn.
+
+```bash
+git clone https://github.com/josealbertodeev/dev-movies.git
+cd dev-movies
+yarn
+yarn dev
+```
+
+| Comando | O que faz |
+| --- | --- |
+| `yarn dev` | Servidor de desenvolvimento |
+| `yarn build` | Versão de produção em `dist/` |
+| `yarn preview` | Serve a versão de produção localmente |
+| `yarn lint` | Verifica o código com ESLint |
+| `yarn format` | Formata o código com Prettier |
+
+## Próximos passos
+
+- Página de detalhes para séries
+- Busca por título
+- Cards dos carrosséis levando à página de detalhes
+- Chave da API em variável de ambiente
+
+## Autor
+
+**José Alberto**: [LinkedIn](https://www.linkedin.com/in/josealbertofarias/) · [Portfólio](https://josealbertodeev.github.io/portfolio/)
